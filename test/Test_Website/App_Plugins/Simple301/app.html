@@ -11,12 +11,6 @@
                         Simple 301 - Redirect Manager
                     </h1>
 
-                    <!-- Clear Cache -->
-                    <div class="pull-right">
-                        <span ng-show="cacheCleared">Cache Cleared!</span>
-                        <button class="btn btn-info btn-sm" ng-click="clearCache()">Clear Cache</button>
-                    </div>
-
                     <p class="lead">
                         Add, Update, and Delete 301 redirects in the table below.
                     </p>
@@ -52,8 +46,9 @@
                         <table ng-table="tableParams" template-header="header" template-pagination="pager" class="table table-full table-full-small">
                             <tbody>
                                 <tr ng-repeat="item in $data">
-                                    <td data-title="'Regex'">
-                                        <input class="form-control" type="checkbox" ng-model="item.IsRegex" ng-disabled="!item.$edit" no-dirty-check />
+                                    <td data-title="'Domain'" sortable="'Domain'">
+                                        <a ng-if="!item.$edit" href="{{item.Domain}}" target="_blank">{{item.Domain}}</a>
+                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.Domain" placeholder="Domain" no-dirty-check /></div>
                                     </td>
                                     <td data-title="'Old Url'" sortable="'OldUrl'">
                                         <span ng-if="!item.$edit && item.IsRegex">{{item.OldUrl}}</span>

@@ -294,11 +294,6 @@
     <Compile Include="Core\RedirectApplicationEvents.cs" />
     <Compile Include="Core\RedirectContentFinder.cs" />
     <Compile Include="Core\RedirectRepository.cs" />
-    <Compile Include="Core\Utilities\Caching\CacheItem.cs" />
-    <Compile Include="Core\Utilities\Caching\CacheManager.cs" />
-    <Compile Include="Core\Utilities\Caching\CacheManagerStatus.cs" />
-    <Compile Include="Core\Utilities\SettingsKeys.cs" />
-    <Compile Include="Core\Utilities\SettingsUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -306,6 +301,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Core\Utilities\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

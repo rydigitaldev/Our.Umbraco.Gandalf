@@ -37,7 +37,7 @@ namespace Simple301.Core
 
             try
             {
-                var redirect = RedirectRepository.AddRedirect(request.IsRegex, request.OldUrl, request.NewUrl, request.Notes);
+                var redirect = RedirectRepository.AddRedirect(request.Domain, request.OldUrl, request.NewUrl, request.Notes);
                 return new AddRedirectResponse() { Success = true, NewRedirect = redirect };
             }
             catch(Exception e)
@@ -89,15 +89,6 @@ namespace Simple301.Core
             {
                 return new DeleteRedirectResponse() { Success = false, Message = "There was an error deleting the redirect : " + e.Message };
             }
-        }
-
-        /// <summary>
-        /// POST to clear cache
-        /// </summary>
-        [HttpPost]
-        public void ClearCache()
-        {
-            RedirectRepository.ClearCache();
         }
     }
 }

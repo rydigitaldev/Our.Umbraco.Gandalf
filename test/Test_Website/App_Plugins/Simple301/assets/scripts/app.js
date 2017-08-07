@@ -25,15 +25,6 @@ angular.module("umbraco").controller("Simple301Controller", function ($scope, $f
     }
 
     /*
-    * Handles clearing the cache by
-    * calling to get all redirects again
-    */
-    $scope.clearCache = function () {
-        $scope.cacheCleared = true;
-        return Simple301Api.clearCache().then($scope.fetchRedirects.bind(this));
-    }
-
-    /*
     * Handles fetching all redirects from the server.
     */
     $scope.fetchRedirects = function () {
@@ -60,7 +51,7 @@ angular.module("umbraco").controller("Simple301Controller", function ($scope, $f
     * Sends request off to API.
     */
     $scope.addRedirect = function (redirect) {
-        Simple301Api.add(redirect.IsRegex, redirect.OldUrl, redirect.NewUrl, redirect.Notes)
+        Simple301Api.add(redirect.Domain, redirect.OldUrl, redirect.NewUrl, redirect.Notes)
             .then($scope.onAddRedirectResponse.bind(this));
     };
 
@@ -173,36 +164,36 @@ angular.module("umbraco").controller("Simple301Controller", function ($scope, $f
         },
         data: $scope.initialData
     }, {
-        total: 0,
-        getData: function ($defer, params) {
+            total: 0,
+            getData: function ($defer, params) {
 
-            //Do we have redirects yet?
-            var data = $scope.redirects || [];
+                //Do we have redirects yet?
+                var data = $scope.redirects || [];
 
-            //Do we have a search term set in the search box?
-            //If so, filter the redirects for that text
-            var searchTerm = params.filter().Search;
-            var searchedData = searchTerm ?
-                data.filter(function (redirect) {
-                    return redirect.Notes.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-                        redirect.OldUrl.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-                        redirect.NewUrl.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
-                }) : data;
+                //Do we have a search term set in the search box?
+                //If so, filter the redirects for that text
+                var searchTerm = params.filter().Search;
+                var searchedData = searchTerm ?
+                    data.filter(function (redirect) {
+                        return redirect.Notes.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
+                            redirect.OldUrl.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
+                            redirect.NewUrl.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+                    }) : data;
 
-            //Are we ordering the results?
-            var orderedData = params.sorting() ?
+                //Are we ordering the results?
+                var orderedData = params.sorting() ?
                     $filter('orderBy')(searchedData, params.orderBy()) :
                     searchedData;
 
-            //Set totals and page counts
-            params.total(orderedData.length);
-            var pagedResults = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                //Set totals and page counts
+                params.total(orderedData.length);
+                var pagedResults = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
-            //Cheat and add a blank redirect so the user can add a new redirect right from the table
-            pagedResults.push({ Id: "-1", IsRegex: false, OldUrl: "", NewUrl: "", Notes: "", LastUpdated: "", $edit: true });
-            $defer.resolve(pagedResults);
-        }
-    })
+                //Cheat and add a blank redirect so the user can add a new redirect right from the table
+                pagedResults.push({ Id: "-1", Domain: "", OldUrl: "", NewUrl: "", Notes: "", LastUpdated: "", $edit: true });
+                $defer.resolve(pagedResults);
+            }
+        })
 
     /*
     * Initial load function to set loaded state
@@ -250,8 +241,8 @@ angular.module("umbraco.resources").factory("Simple301Api", function ($http) {
             return $http.get("backoffice/Simple301/RedirectApi/GetAll");
         },
         //Send data to add a new redirect
-        add: function (isRegex, oldUrl, newUrl, notes) {
-            return $http.post("backoffice/Simple301/RedirectApi/Add", JSON.stringify({ isRegex: isRegex, oldUrl: oldUrl, newUrl: newUrl, notes: notes }));
+        add: function (domain, oldUrl, newUrl, notes) {
+            return $http.post("backoffice/Simple301/RedirectApi/Add", JSON.stringify({ domain: domain, oldUrl: oldUrl, newUrl: newUrl, notes: notes }));
         },
         //Send request to update an existing redirect
         update: function (redirect) {
@@ -260,11 +251,6 @@ angular.module("umbraco.resources").factory("Simple301Api", function ($http) {
         //Remove / Delete an existing redirect
         remove: function (id) {
             return $http.delete("backoffice/Simple301/RedirectApi/Delete/" + id);
-        },
-
-        //Clear cache
-        clearCache: function () {
-            return $http.post("backoffice/Simple301/RedirectApi/ClearCache");
         }
     };
 });

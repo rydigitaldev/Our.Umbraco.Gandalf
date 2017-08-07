@@ -5,8 +5,8 @@ using System.Linq;
 using Umbraco.Core;
 using Simple301.Core.Extensions;
 using System.Text.RegularExpressions;
-using Simple301.Core.Utilities;
-using Simple301.Core.Utilities.Caching;
+using Umbraco.Core.Persistence;
+using Umbraco.Core.Persistence.SqlSyntax;
 
 namespace Simple301.Core
 {
@@ -17,27 +17,6 @@ namespace Simple301.Core
     /// </summary>
     public static class RedirectRepository
     {
-        private static CacheManager _cacheManager;
-        private const int DEFAULT_CACHE_DURATION = 86400;
-        private const string CACHE_CATEGORY = "Redirects";
-        private const string CACHE_ALL_KEY = "AllRedirects";
-
-        static RedirectRepository()
-        {
-            var settingsUtility = new SettingsUtility();
-
-            // define the cache duration
-            var cacheDuration = settingsUtility.AppSettingExists(SettingsKeys.CacheDurationKey) ?
-                settingsUtility.GetAppSetting<int>(SettingsKeys.CacheDurationKey) : DEFAULT_CACHE_DURATION;
-
-            // define cache enabled
-            var cacheEnabled = settingsUtility.AppSettingExists(SettingsKeys.CacheEnabledKey) ?
-                settingsUtility.GetAppSetting<bool>(SettingsKeys.CacheEnabledKey) :
-                true;
-
-            _cacheManager = new CacheManager(cacheDuration, cacheEnabled);
-        }
-
         /// <summary>
         /// Get all redirects from the repositry
         /// </summary>
@@ -55,14 +34,13 @@ namespace Simple301.Core
         /// <param name="newUrl">New Url to redirect to</param>
         /// <param name="notes">Any associated notes with this redirect</param>
         /// <returns>New redirect from DB if successful</returns>
-        public static Redirect AddRedirect(bool isRegex, string oldUrl, string newUrl, string notes)
+        public static Redirect AddRedirect(string domain, string oldUrl, string newUrl, string notes)
         {
             if (!oldUrl.IsSet()) throw new ArgumentNullException("oldUrl");
             if (!newUrl.IsSet()) throw new ArgumentNullException("newUrl");
 
             //Ensure starting slash if not regex
-            if(!isRegex)
-                oldUrl = oldUrl.EnsurePrefix("/").ToLower();
+            oldUrl = oldUrl.EnsurePrefix("/").ToLower();
 
             // Allow external redirects and ensure slash if not absolute
             newUrl = Uri.IsWellFormedUriString(newUrl, UriKind.Absolute) ?
@@ -70,26 +48,19 @@ namespace Simple301.Core
                 newUrl.EnsurePrefix("/").ToLower();
 
             // First look for single match
-            var redirect = FetchRedirectByOldUrl(oldUrl);
-            if (redirect != null) throw new ArgumentException("A redirect for " + oldUrl + " already exists");
-
-            // Second pull all for loop detection
-            var redirects = FetchRedirects();
-            if (!isRegex && DetectLoop(oldUrl, newUrl, redirects)) throw new ApplicationException("Adding this redirect would cause a redirect loop");
+            var redirect = FetchRedirectsByOldUrl(oldUrl, domain);
+            if (redirect != null) throw new ArgumentException("A redirect for " + domain + oldUrl + " already exists");
 
             //Add redirect to DB
             var db = ApplicationContext.Current.DatabaseContext.Database;
             var idObj = db.Insert(new Redirect()
             {
-                IsRegex = isRegex,
                 OldUrl = oldUrl,
                 NewUrl = newUrl,
                 LastUpdated = DateTime.Now.ToUniversalTime(),
-                Notes = notes
+                Notes = notes,
+                Domain = domain
             });
-
-            //Clear the current cache
-            ClearCache();
 
             //Fetch the added redirect
             var newRedirect = FetchRedirectById(Convert.ToInt32(idObj));
@@ -110,30 +81,19 @@ namespace Simple301.Core
             if (!redirect.NewUrl.IsSet()) throw new ArgumentNullException("redirect.NewUrl");
 
             //Ensure starting slash
-            if(!redirect.IsRegex)
-                redirect.OldUrl = redirect.OldUrl.EnsurePrefix("/").ToLower();
+            redirect.OldUrl = redirect.OldUrl.EnsurePrefix("/").ToLower();
 
             // Allow external redirects and ensure slash if not absolute
             redirect.NewUrl = Uri.IsWellFormedUriString(redirect.NewUrl, UriKind.Absolute) ?
                 redirect.NewUrl :
                 redirect.NewUrl.EnsurePrefix("/").ToLower();
 
-
-            // First check if a single existing redirect
-            var existingRedirect = FetchRedirectByOldUrl(redirect.OldUrl);
-            if (existingRedirect != null && existingRedirect.Id != redirect.Id) throw new ArgumentException("A redirect for " + redirect.OldUrl + " already exists");
-
-            // Second pull all for loop detection
-            var redirects = FetchRedirects();
-            if (!redirect.IsRegex && DetectLoop(redirect.OldUrl, redirect.NewUrl, redirects)) throw new ApplicationException("Adding this redirect would cause a redirect loop");
+            //todo: do infinite loop check with domain - previous version was without
 
             //get DB Context, set update time, and persist
             var db = ApplicationContext.Current.DatabaseContext.Database;
             redirect.LastUpdated = DateTime.Now.ToUniversalTime();
             db.Update(redirect);
-
-            //Clear the current cache
-            ClearCache();
 
             //return updated redirect
             return redirect;
@@ -151,9 +111,6 @@ namespace Simple301.Core
             //Get database context and delete
             var db = ApplicationContext.Current.DatabaseContext.Database;
             db.Delete(item);
-
-            //Clear the current cache
-            ClearCache();
         }
 
         /// <summary>
@@ -161,44 +118,20 @@ namespace Simple301.Core
         /// </summary>
         /// <param name="oldUrl">Url to search for</param>
         /// <returns>Matched Redirect</returns>
-        public static Redirect FindRedirect(string oldUrl)
+        public static Redirect FindRedirect(string oldUrl, string domain)
         {
-            var matchedRedirect = FetchRedirectByOldUrl(oldUrl, fromCache: true);
+            var matchedRedirect = FetchRedirectsByOldUrl(oldUrl, domain);
             if (matchedRedirect != null) return matchedRedirect;
 
-            // fetch regex redirects
-            var regexRedirects = FetchRegexRedirects(fromCache: true);
-
-            foreach(var regexRedirect in regexRedirects)
-            {
-                if (Regex.IsMatch(oldUrl,regexRedirect.OldUrl)) return regexRedirect;
-            }
-
             return null;
-        }
-
-        /// <summary>
-        /// Handles clearing the cache
-        /// </summary>
-        public static void ClearCache()
-        {
-            // Delete all items in redirect category
-            _cacheManager.GetCacheItems()
-                .Where(x => x.Category.Equals(CACHE_CATEGORY))
-                .ToList()
-                .ForEach(x => _cacheManager.DeleteItem(x.Category, x.Key));
         }
 
         /// <summary>
         /// Fetches all redirects through cache layer
         /// </summary>
         /// <returns>Collection of redirects</returns>
-        private static Dictionary<string,Redirect> FetchRedirects(bool fromCache = false)
+        private static Dictionary<string,Redirect> FetchRedirects()
         {
-            // if from cache, make sure we add if it doesn't exist
-            if (fromCache)
-                return _cacheManager.GetAndSet(CACHE_CATEGORY, CACHE_ALL_KEY, () => FetchRedirectsFromDb());
-
             return FetchRedirectsFromDb();
         }
 
@@ -207,14 +140,9 @@ namespace Simple301.Core
         /// </summary>
         /// <param name="id">Id of redirect to fetch</param>
         /// <returns>Single redirect with matching Id</returns>
-        private static Redirect FetchRedirectById(int id, bool fromCache = false)
+        private static Redirect FetchRedirectById(int id)
         {
-            var query = "SELECT * FROM Redirects WHERE Id=@0";
-
-            if (fromCache)
-                return _cacheManager.GetAndSet(CACHE_CATEGORY, "Id:" + id, () => FetchRedirectFromDbByQuery(query, id));
-
-            return FetchRedirectFromDbByQuery(query, id);
+            return ApplicationContext.Current.DatabaseContext.Database.Single<Redirect>(id);
         }
 
         /// <summary>
@@ -222,29 +150,10 @@ namespace Simple301.Core
         /// </summary>
         /// <param name="oldUrl">OldUrl of redirect to find</param>
         /// <returns>Single redirect with matching OldUrl</returns>
-        private static Redirect FetchRedirectByOldUrl(string oldUrl, bool fromCache = false)
+        private static Redirect FetchRedirectsByOldUrl(string oldUrl, string domain)
         {
-            var query = "SELECT * FROM Redirects WHERE OldUrl=@0";
-
-            if (fromCache)
-                return _cacheManager.GetAndSet(CACHE_CATEGORY, "OldUrl:" + oldUrl, () => FetchRedirectFromDbByQuery(query, oldUrl));
-
-            return FetchRedirectFromDbByQuery(query, oldUrl);
-        }
-
-        /// <summary>
-        /// Fetches the list of Regex redirects from the DB or cache
-        /// </summary>
-        /// <param name="fromCache">Set to pull from cache</param>
-        /// <returns>Collection or regex redirects</returns>
-        private static List<Redirect> FetchRegexRedirects(bool fromCache = false)
-        {
-            var query = "SELECT * FROM Redirects WHERE IsRegex=@0";
-
-            if (fromCache)
-                return _cacheManager.GetAndSet(CACHE_CATEGORY, "RegexRedirects", () => FetchRedirectsFromDbByQuery(query, true));
-
-            return FetchRedirectsFromDbByQuery(query, true);
+            var query = "SELECT * FROM Redirects WHERE OldUrl=@0 AND Domain=@1";
+            return ApplicationContext.Current.DatabaseContext.Database.Query<Redirect>(query, oldUrl, domain).SingleOrDefault();
         }
 
         /// <summary>
@@ -255,10 +164,10 @@ namespace Simple301.Core
         /// <param name="query">Query</param>
         /// <param name="param">Param value</param>
         /// <returns>Redirect</returns>
-        private static Redirect FetchRedirectFromDbByQuery<T>(string query, T param)
+        private static IEnumerable<Redirect> FetchRedirectFromDbByQuery<T>(string query, params object[] param)
         {
             var db = ApplicationContext.Current.DatabaseContext.Database;
-            return db.FirstOrDefault<Redirect>(query, param);
+            return db.Query<Redirect>(query, param);
         }
 
         /// <summary>

@@ -42,6 +42,7 @@ namespace Simple301.Core
                 creator.CreateTable<Redirect>(false);
                 this.AddTargetVersionMigrationEntry(migrationService);
             }
+
             else if(!MigrationVersionCheck(migrationService) && !ValidateTableRead(db, migrationService))
             {
                 HandleMigrations(db, migrationService);
@@ -83,7 +84,7 @@ namespace Simple301.Core
             try
             {
                 // run through creating and deleting a redirect.
-                var redirect = RedirectRepository.AddRedirect(true, "old", "new", "notes");
+                var redirect = RedirectRepository.AddRedirect("old", "test-domain", "new", "notes");
                 RedirectRepository.DeleteRedirect(redirect.Id);
                 this.AddTargetVersionMigrationEntry(migrationService);
                 return true;
