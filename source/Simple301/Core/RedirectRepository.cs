@@ -24,7 +24,7 @@ namespace Simple301.Core
         public static IEnumerable<Redirect> GetAllRedirects()
         {
             // Update with latest from DB
-            return FetchRedirects().Select(x => x.Value);
+            return FetchRedirectsFromDb();
         }
 
         /// <summary>
@@ -127,15 +127,6 @@ namespace Simple301.Core
         }
 
         /// <summary>
-        /// Fetches all redirects through cache layer
-        /// </summary>
-        /// <returns>Collection of redirects</returns>
-        private static Dictionary<string,Redirect> FetchRedirects()
-        {
-            return FetchRedirectsFromDb();
-        }
-
-        /// <summary>
         /// Fetches a single redirect from the DB based on an Id
         /// </summary>
         /// <param name="id">Id of redirect to fetch</param>
@@ -188,11 +179,11 @@ namespace Simple301.Core
         /// Fetches all redirects from the database
         /// </summary>
         /// <returns>Collection of redirects</returns>
-        private static Dictionary<string, Redirect> FetchRedirectsFromDb()
+        private static IEnumerable<Redirect> FetchRedirectsFromDb()
         {
             var db = ApplicationContext.Current.DatabaseContext.Database;
             var redirects = db.Query<Redirect>("SELECT * FROM Redirects");
-            return redirects != null ? redirects.ToDictionary(x => x.OldUrl) : new Dictionary<string, Redirect>();
+            return redirects;
         }
 
         /// <summary>
