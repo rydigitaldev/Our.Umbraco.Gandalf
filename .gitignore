@@ -204,7 +204,6 @@ test/Test_Website/js/
 test/Test_Website/default.aspx
 test/Test_Website/css/
 test/Test_Website/Views/
-test/Test_Website/Properties/
 test/Test_Website/Global.asax
 test/Test_Website/Config/
 test/Test_Website/App_Plugins/Grid/
