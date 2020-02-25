@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Our.Umbraco.Simple301</id>
+    <version>1.0.0</version>
+    <authors>Radley Yeldar</authors>
+    <owners>Radley Yeldar</owners>
+    <licenseUrl>https://raw.githubusercontent.com/rydigital/Our.Umbraco.Simple301/master/LICENSE</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/rydigital/Our.Umbraco.Simple301/master/package/simple301Logo.png</iconUrl>
+    <projectUrl>https://github.com/rydigital/Our.Umbraco.Simple301</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Umbraco 301 Redirect Manager for the Umbraco Backoffice. Forked from https://github.com/wkallhof/Simple301, and updated to Umbraco v8.1+.</description>
+    <copyright>Copyright 2020</copyright>
+    <tags>umbraco, 301, redirect, redirection</tags>
+    <releaseNotes>Updating install script to create new dashboard section</releaseNotes>
+	<dependencies>
+	  <dependency id="UmbracoCms.Core" version="8.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\src\Our.Umbraco.Simple301\bin\release\Our.Umbraco.Simple301.dll" target="lib\net472" />
+    <file src="..\..\src\Our.Umbraco.Simple301\UI\**\*.*" target="content" />
+    <file src="..\..\assets\Dashboard.config.install.xdt" target="content\Config"/>
+    <file src="..\..\assets\Dashboard.config.uninstall.xdt" target="content\Config"/>
+    <file src="..\..\assets\Web.config.install.xdt" target="content"/>
+    <file src="..\..\assets\Web.config.uninstall.xdt" target="content"/>
+  </files>
+
+</package>
