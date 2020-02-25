@@ -1,0 +1,19 @@
+﻿{
+	javascript: [
+		"~/App_Plugins/Simple301/assets/scripts/app.js",
+		"~/App_Plugins/Simple301/assets/scripts/vendors.min.js"
+	],
+	css: [
+		"~/App_Plugins/Simple301/assets/styles/styles.min.css",
+		"~/App_Plugins/Simple301/assets/styles/vendors.min.css"
+	],
+	"dashboards": [
+		{
+            "alias": "Simple301",
+			      "name": "Simple 301",
+            "view":  "/App_Plugins/Simple301/app.html",
+            "sections":  [ "content" ],
+            "weight": -10
+        }
+	]
+}

@@ -7,8 +7,6 @@ namespace Simple301.Core.Models
     {
         public bool IsRegex { get; set; }
 
-        public string Domain { get; set; }
-
         [Required]
         public string OldUrl { get; set; }
         [Required]

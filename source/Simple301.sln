@@ -1,36 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple301", "Simple301\Simple301.csproj", "{418B07FD-2CA7-4195-8DD0-3252201485FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Website", "..\test\Test_Website\Test_Website.csproj", "{89F40730-A8E8-4A33-A0ED-3B67877E403A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
 		Release-net45|Any CPU = Release-net45|Any CPU
 		Release-net452|Any CPU = Release-net452|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release|Any CPU.ActiveCfg = Release-net452|Any CPU
-		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release|Any CPU.Build.0 = Release-net452|Any CPU
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net45|Any CPU.ActiveCfg = Release-net45|Any CPU
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net45|Any CPU.Build.0 = Release-net45|Any CPU
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net452|Any CPU.ActiveCfg = Release-net452|Any CPU
 		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net452|Any CPU.Build.0 = Release-net452|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release-net45|Any CPU.Build.0 = Release|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release-net452|Any CPU.ActiveCfg = Release|Any CPU
-		{89F40730-A8E8-4A33-A0ED-3B67877E403A}.Release-net452|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

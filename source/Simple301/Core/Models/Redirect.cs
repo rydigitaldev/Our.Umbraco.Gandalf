@@ -1,11 +1,12 @@
-﻿using System;
+﻿using NPoco;
+using System;
 using Umbraco.Core.Persistence;
 using Umbraco.Core.Persistence.DatabaseAnnotations;
 
 namespace Simple301.Core.Models
 {
     [TableName("Redirects")]
-    [PrimaryKey("Id", autoIncrement = true)]
+    [PrimaryKey("Id", AutoIncrement = true)]
     [ExplicitColumns]
     public class Redirect
     {
@@ -13,8 +14,8 @@ namespace Simple301.Core.Models
         [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
-        [Column("Domain")]
-        public string Domain { get; set; }
+        [Column("IsRegex")]
+        public bool IsRegex { get; set; }
 
         [Column("OldUrl")]
         public string OldUrl { get; set; }

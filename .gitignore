@@ -194,19 +194,3 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-
-#default MVC / Umbraco files, not needed as test is for the backoffice only
-test/Test_Website/umbraco_client/
-test/Test_Website/umbraco/
-test/Test_Website/scripts/
-test/Test_Website/media/
-test/Test_Website/js/
-test/Test_Website/default.aspx
-test/Test_Website/css/
-test/Test_Website/Views/
-test/Test_Website/Global.asax
-test/Test_Website/Config/
-test/Test_Website/App_Plugins/Grid/
-test/Test_Website/App_Data/
-test/Test_Website/App_Browsers/
-test/Test_Website/Views/
