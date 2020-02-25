@@ -1,9 +1,5 @@
-# No longer being maintained! Please reach out if you'd like to take ownership
-
-# Simple301
+# Our.Umbraco.Simple301
 ### 301 Redirect Manager for Umbraco ###
-[![Build status](https://img.shields.io/appveyor/ci/wkallhof/simple301/master.svg)](https://ci.appveyor.com/project/wkallhof/simple301/branch/master)
-
 Simple 301 Redirect Manager is a simple to use, yet extensible, Umbraco Back-Office package that allows you to manage your 301 redirects directly in Umbraco. Includes a simple and intuitive refinement system where you can search for specific text within the URLs or notes defined for the redirect. 
 
 Utilizes [ngTable][ngTableLink] for an AngularJs driven data table which includes ordering by column (Old Url, New Url, Notes and Last Updated) and simple pagination with configurable items per page selector. 
@@ -12,7 +8,7 @@ Integrates directly with the Umbraco Content Pipeline, inserting itself in the f
 
 ### Getting Started ###
 
-Nuget Package: ` Install-Package Simple301 `
+Nuget Package: ` Install-Package Our.Umbraco.Simple301 `
 
 ### Configuration ###
 By default, your `web.config` file will be updated with two application settings which are used to manage the cached state of the redirects that are created. They are as default :
@@ -49,10 +45,12 @@ Use the provided actions in the Action column to Add, Update & Delete existing r
 
 ![Add, Update & Delete][crudImage]
 
-__Support:__ [Documentation Wiki](https://github.com/wkallhof/Simple301/wiki), [Issue Logging](https://github.com/wkallhof/Simple301/issues)
+# Credits
+Forked from https://github.com/wkallhof/Simple301/ as he was looking for someone to take over the project.
+
 
 [ngTableLink]: https://github.com/esvit/ng-table
 [highlightJsLink]: https://github.com/isagalaev/highlight.js
-[locateImage]: package/Locate.gif  "Locate"
-[refineImage]: package/Refine.gif  "Refine"
-[crudImage]: package/Crud.gif "Create, Update & Delete"
+[locateImage]: assets/Locate.gif  "Locate"
+[refineImage]: assets/Refine.gif  "Refine"
+[crudImage]: assets/Crud.gif "Create, Update & Delete"

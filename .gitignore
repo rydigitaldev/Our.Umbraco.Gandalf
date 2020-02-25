@@ -194,3 +194,13 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# UmbracoCms
+samples/*/Umbraco/
+samples/*/App_Data/Logs/
+samples/*/App_Data/TEMP/*
+build/Package
+build/msbuild.binlog
+samples/Application.Demo/App_Plugins/Our.Umbraco.Simple301/
+
+samples/Application.Demo/App_Data/Models/ood.flag

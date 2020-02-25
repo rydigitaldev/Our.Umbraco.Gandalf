@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IPublishedContent>
+
+@{
+	Layout = "_Layout.cshtml";
+}
+
+<div class="container">
+	<section>
+		@Model.Value("title")
+	</section>
+</div>

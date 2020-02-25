@@ -319,162 +319,7 @@
     <Content Include="obj\Release-net452\Simple301.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Release-net45\Simple301.csproj.FileListAbsolute.txt" />
     <None Include="app.config" />
-    <Content Include="bin\Debug\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
-    <Content Include="bin\Debug\amd64\sqlceca40.dll" />
-    <Content Include="bin\Debug\amd64\sqlcecompact40.dll" />
-    <Content Include="bin\Debug\amd64\sqlceer40EN.dll" />
-    <Content Include="bin\Debug\amd64\sqlceme40.dll" />
-    <Content Include="bin\Debug\amd64\sqlceqp40.dll" />
-    <Content Include="bin\Debug\amd64\sqlcese40.dll" />
-    <Content Include="bin\Debug\AutoMapper.dll" />
-    <Content Include="bin\Debug\AutoMapper.Net4.dll" />
-    <Content Include="bin\Debug\AutoMapper.xml" />
-    <Content Include="bin\Debug\ClientDependency.Core.dll" />
-    <Content Include="bin\Debug\ClientDependency.Core.Mvc.dll" />
-    <Content Include="bin\Debug\ClientDependency.Core.Mvc.pdb" />
-    <Content Include="bin\Debug\ClientDependency.Core.pdb" />
-    <Content Include="bin\Debug\CookComputing.XmlRpcV2.dll" />
-    <Content Include="bin\Debug\CSharpTest.Net.Collections.dll" />
-    <Content Include="bin\Debug\CSharpTest.Net.Collections.xml" />
-    <Content Include="bin\Debug\Examine.dll" />
-    <Content Include="bin\Debug\Examine.pdb" />
-    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
-    <Content Include="bin\Debug\HtmlAgilityPack.pdb" />
-    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
-    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
-    <Content Include="bin\Debug\ImageProcessor.dll" />
-    <Content Include="bin\Debug\ImageProcessor.Web.dll" />
-    <Content Include="bin\Debug\ImageProcessor.xml" />
-    <Content Include="bin\Debug\LightInject.Annotation.dll" />
-    <Content Include="bin\Debug\LightInject.Annotation.pdb" />
-    <Content Include="bin\Debug\LightInject.dll" />
-    <Content Include="bin\Debug\LightInject.Mvc.dll" />
-    <Content Include="bin\Debug\LightInject.Mvc.pdb" />
-    <Content Include="bin\Debug\LightInject.pdb" />
-    <Content Include="bin\Debug\LightInject.Web.dll" />
-    <Content Include="bin\Debug\LightInject.Web.pdb" />
-    <Content Include="bin\Debug\LightInject.Web.xml" />
-    <Content Include="bin\Debug\LightInject.WebApi.dll" />
-    <Content Include="bin\Debug\LightInject.WebApi.pdb" />
-    <Content Include="bin\Debug\LightInject.WebApi.xml" />
-    <Content Include="bin\Debug\LightInject.xml" />
-    <Content Include="bin\Debug\Lucene.Net.dll" />
-    <Content Include="bin\Debug\Lucene.Net.pdb" />
-    <Content Include="bin\Debug\Lucene.Net.xml" />
-    <Content Include="bin\Debug\Markdown.dll" />
-    <Content Include="bin\Debug\Microsoft.AspNet.Identity.Core.dll" />
-    <Content Include="bin\Debug\Microsoft.AspNet.Identity.Core.xml" />
-    <Content Include="bin\Debug\Microsoft.AspNet.Identity.Owin.dll" />
-    <Content Include="bin\Debug\Microsoft.AspNet.Identity.Owin.xml" />
-    <Content Include="bin\Debug\Microsoft.AspNet.SignalR.Core.dll" />
-    <Content Include="bin\Debug\Microsoft.AspNet.SignalR.Core.pdb" />
-    <Content Include="bin\Debug\Microsoft.AspNet.SignalR.Core.xml" />
-    <Content Include="bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
-    <Content Include="bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
-    <Content Include="bin\Debug\Microsoft.Owin.dll" />
-    <Content Include="bin\Debug\Microsoft.Owin.Host.SystemWeb.dll" />
-    <Content Include="bin\Debug\Microsoft.Owin.Host.SystemWeb.xml" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.Cookies.dll" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.Cookies.xml" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.dll" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.OAuth.dll" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.OAuth.xml" />
-    <Content Include="bin\Debug\Microsoft.Owin.Security.xml" />
-    <Content Include="bin\Debug\Microsoft.Owin.xml" />
-    <Content Include="bin\Debug\Microsoft.Web.Helpers.dll" />
-    <Content Include="bin\Debug\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Debug\MiniProfiler.dll" />
-    <Content Include="bin\Debug\MiniProfiler.Shared.dll" />
-    <Content Include="bin\Debug\MiniProfiler.Shared.xml" />
-    <Content Include="bin\Debug\MiniProfiler.xml" />
-    <Content Include="bin\Debug\MySql.Data.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.pdb" />
-    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
-    <Content Include="bin\Debug\NPoco.dll" />
-    <Content Include="bin\Debug\Owin.dll" />
-    <Content Include="bin\Debug\Semver.dll" />
-    <Content Include="bin\Debug\Semver.xml" />
-    <Content Include="bin\Debug\Serilog.dll" />
-    <Content Include="bin\Debug\Serilog.Enrichers.Process.dll" />
-    <Content Include="bin\Debug\Serilog.Enrichers.Thread.dll" />
-    <Content Include="bin\Debug\Serilog.Enrichers.Thread.xml" />
-    <Content Include="bin\Debug\Serilog.Filters.Expressions.dll" />
-    <Content Include="bin\Debug\Serilog.Filters.Expressions.xml" />
-    <Content Include="bin\Debug\Serilog.Formatting.Compact.dll" />
-    <Content Include="bin\Debug\Serilog.Formatting.Compact.Reader.dll" />
-    <Content Include="bin\Debug\Serilog.Formatting.Compact.Reader.xml" />
-    <Content Include="bin\Debug\Serilog.Formatting.Compact.xml" />
-    <Content Include="bin\Debug\Serilog.pdb" />
-    <Content Include="bin\Debug\Serilog.Settings.AppSettings.dll" />
-    <Content Include="bin\Debug\Serilog.Sinks.Async.dll" />
-    <Content Include="bin\Debug\Serilog.Sinks.Async.xml" />
-    <Content Include="bin\Debug\Serilog.Sinks.File.dll" />
-    <Content Include="bin\Debug\Serilog.Sinks.File.xml" />
-    <Content Include="bin\Debug\Serilog.Sinks.Map.dll" />
-    <Content Include="bin\Debug\Serilog.Sinks.Map.xml" />
-    <Content Include="bin\Debug\Serilog.xml" />
-    <Content Include="bin\Debug\Simple301.dll" />
-    <Content Include="bin\Debug\Simple301.pdb" />
-    <Content Include="bin\Debug\Superpower.dll" />
-    <Content Include="bin\Debug\Superpower.xml" />
-    <Content Include="bin\Debug\System.Data.SqlServerCe.dll" />
-    <Content Include="bin\Debug\System.Data.SqlServerCe.Entity.dll" />
-    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="bin\Debug\System.Diagnostics.DiagnosticSource.xml" />
-    <Content Include="bin\Debug\System.Net.Http.Extensions.dll" />
-    <Content Include="bin\Debug\System.Net.Http.Extensions.xml" />
-    <Content Include="bin\Debug\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\Debug\System.Net.Http.Formatting.xml" />
-    <Content Include="bin\Debug\System.Net.Http.Primitives.dll" />
-    <Content Include="bin\Debug\System.Net.Http.Primitives.xml" />
-    <Content Include="bin\Debug\System.Threading.Tasks.Dataflow.dll" />
-    <Content Include="bin\Debug\System.Threading.Tasks.Dataflow.xml" />
-    <Content Include="bin\Debug\System.ValueTuple.dll" />
-    <Content Include="bin\Debug\System.ValueTuple.xml" />
-    <Content Include="bin\Debug\System.Web.Helpers.dll" />
-    <Content Include="bin\Debug\System.Web.Helpers.xml" />
-    <Content Include="bin\Debug\System.Web.Http.dll" />
-    <Content Include="bin\Debug\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\Debug\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\Debug\System.Web.Http.xml" />
-    <Content Include="bin\Debug\System.Web.Mvc.dll" />
-    <Content Include="bin\Debug\System.Web.Mvc.xml" />
-    <Content Include="bin\Debug\System.Web.Razor.dll" />
-    <Content Include="bin\Debug\System.Web.Razor.xml" />
-    <Content Include="bin\Debug\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\Debug\System.Web.WebPages.Deployment.xml" />
-    <Content Include="bin\Debug\System.Web.WebPages.dll" />
-    <Content Include="bin\Debug\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\Debug\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\Debug\System.Web.WebPages.xml" />
-    <Content Include="bin\Debug\Umbraco.Core.dll" />
-    <Content Include="bin\Debug\Umbraco.Core.pdb" />
-    <Content Include="bin\Debug\Umbraco.Core.xml" />
-    <Content Include="bin\Debug\Umbraco.Examine.dll" />
-    <Content Include="bin\Debug\Umbraco.Examine.pdb" />
-    <Content Include="bin\Debug\Umbraco.Examine.xml" />
-    <Content Include="bin\Debug\Umbraco.Web.dll" />
-    <Content Include="bin\Debug\Umbraco.Web.pdb" />
-    <Content Include="bin\Debug\Umbraco.Web.UI.dll" />
-    <Content Include="bin\Debug\Umbraco.Web.UI.xml" />
-    <Content Include="bin\Debug\Umbraco.Web.xml" />
-    <Content Include="bin\Debug\WebMatrix.Data.dll" />
-    <Content Include="bin\Debug\WebMatrix.Data.xml" />
-    <Content Include="bin\Debug\WebMatrix.WebData.dll" />
-    <Content Include="bin\Debug\WebMatrix.WebData.xml" />
-    <Content Include="bin\Debug\x86\Microsoft.VC90.CRT\msvcr90.dll" />
-    <Content Include="bin\Debug\x86\sqlceca40.dll" />
-    <Content Include="bin\Debug\x86\sqlcecompact40.dll" />
-    <Content Include="bin\Debug\x86\sqlceer40EN.dll" />
-    <Content Include="bin\Debug\x86\sqlceme40.dll" />
-    <Content Include="bin\Debug\x86\sqlceqp40.dll" />
-    <Content Include="bin\Debug\x86\sqlcese40.dll" />
-    <Content Include="Simple301\package.manifest" />
-    <None Include="bin\Debug\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
-    <None Include="bin\Debug\LightInject.WebApi.dll.config" />
-    <None Include="bin\Debug\Simple301.dll.config" />
-    <None Include="bin\Debug\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\package.manifest" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\Simple301.csproj.App.config" />
@@ -489,19 +334,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Release\net452\" />
-    <Folder Include="bin\Release\net45\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="obj\Release-net452\TempPE\" />
     <Folder Include="obj\Release-net45\TempPE\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Simple301\app.html" />
-    <Content Include="Simple301\assets\scripts\app.js" />
-    <Content Include="Simple301\assets\scripts\vendors.min.js" />
-    <Content Include="Simple301\assets\styles\styles.min.css" />
-    <Content Include="Simple301\assets\styles\vendors.min.css" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\app.html" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\assets\scripts\app.js" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\assets\scripts\vendors.min.js" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\assets\styles\styles.min.css" />
+    <Content Include="UI\App_Plugins\Our.Umbraco.Simple301\assets\styles\vendors.min.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
@@ -516,6 +359,12 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+robocopy "$(ProjectDir)UI\App_Plugins" "$(SolutionDir)..\samples\Application.Demo\App_Plugins" /s 
+if %25errorlevel%25 LEQ 8 exit 0
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
