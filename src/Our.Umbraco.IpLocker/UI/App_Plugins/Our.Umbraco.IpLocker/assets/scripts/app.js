@@ -3,7 +3,7 @@
 /*
 * IpLockerCONTROLLER
 * -----------------------------------------------------
-* Main Simple 301 controller used to render out the Simple 301 content section
+* Main controller used to render out the content section
 */
 angular.module("umbraco").controller("IpLockerController", function ($scope, $filter, IpLockerApi, ngTableParams) {
 

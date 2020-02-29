@@ -8,7 +8,7 @@ using Umbraco.Web.WebApi;
 namespace Our.Umbraco.IpLocker.Core
 {
     /// <summary>
-    /// Main plugin controller for Simple 301 - Redirect Manager.
+    /// Main plugin controller
     /// Handles making calls to the Redirect Repository for CRUD operations
     /// </summary>
     [PluginController("IpLocker")]
