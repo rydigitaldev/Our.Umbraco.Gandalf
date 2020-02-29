@@ -163,4 +163,6 @@ samples/*/App_Data/Logs/
 samples/*/App_Data/TEMP/*
 build/Package
 build/msbuild.binlog
-samples/Application.Demo/App_Plugins/Our.Umbraco.Simple301/
+
+samples/Application.Demo/App_Plugins/
+samples/Application.Demo/media/

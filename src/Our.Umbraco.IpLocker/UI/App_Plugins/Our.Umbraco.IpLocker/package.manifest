@@ -1,0 +1,19 @@
+﻿{
+	javascript: [
+		"~/App_Plugins/Our.Umbraco.IpLocker/assets/scripts/app.js",
+		"~/App_Plugins/Our.Umbraco.IpLocker/assets/scripts/vendors.min.js"
+	],
+	css: [
+		"~/App_Plugins/Our.Umbraco.IpLocker/assets/styles/styles.min.css",
+		"~/App_Plugins/Our.Umbraco.IpLocker/assets/styles/vendors.min.css"
+	],
+	"dashboards": [
+		{
+            "alias": "Our.Umbraco.IpLocker",
+			      "name": "Our.Umbraco.IpLocker",
+            "view":  "/App_Plugins/Our.Umbraco.IpLocker/app.html",
+            "sections":  [ "content" ],
+            "weight": -10
+        }
+	]
+}

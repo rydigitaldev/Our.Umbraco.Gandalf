@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.IpLocker", "Our.Umbraco.IpLocker\Our.Umbraco.IpLocker.csproj", "{418B07FD-2CA7-4195-8DD0-3252201485FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "..\samples\Application.Demo\Application.Demo.csproj", "{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Release-net45|Any CPU = Release-net45|Any CPU
+		Release-net452|Any CPU = Release-net452|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net45|Any CPU.Build.0 = Release|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net452|Any CPU.ActiveCfg = Release|Any CPU
+		{418B07FD-2CA7-4195-8DD0-3252201485FE}.Release-net452|Any CPU.Build.0 = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net45|Any CPU.Build.0 = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net452|Any CPU.ActiveCfg = Release|Any CPU
+		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net452|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C940E746-9851-442D-BC6C-5AAC62086373}
+	EndGlobalSection
+EndGlobal
