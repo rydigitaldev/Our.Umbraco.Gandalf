@@ -4,9 +4,9 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Scoping;
 using Umbraco.Core.Migrations;
 using Umbraco.Core.Migrations.Upgrade;
-using Our.Umbraco.IpLocker.Core.Migrations;
+using Our.Umbraco.IpLocker.Core.StartUp.Migrations;
 
-namespace Our.Umbraco.IpLocker.Core.Components
+namespace Our.Umbraco.IpLocker.Core.StartUp
 {
     public class MigrationsComponent : IComponent
     {

@@ -1,42 +1,31 @@
 ﻿using Our.Umbraco.IpLocker.Core.Models;
+using Our.Umbraco.IpLocker.Core.Models.Pocos;
+using Our.Umbraco.IpLocker.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
-namespace Our.Umbraco.IpLocker.Core
+namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 {
-    /// <summary>
-    /// Main plugin controller
-    /// Handles making calls to the Redirect Repository for CRUD operations
-    /// </summary>
     [PluginController("IpLocker")]
     public class RedirectApiController : UmbracoAuthorizedApiController
     {
-        private IRedirectRepository _redirectRepository;
+        private IRepository _redirectRepository;
 
-        public RedirectApiController(IRedirectRepository redirectRepository)
+        public RedirectApiController(IRepository redirectRepository)
         {
             _redirectRepository = redirectRepository;
         }
 
 
-        /// <summary>
-        /// GET all redirects
-        /// </summary>
-        /// <returns>Collection of all redirects</returns>
         [HttpGet]
-        public IEnumerable<Redirect> GetAll()
+        public IEnumerable<AllowedIp> GetAll()
         {
-            return _redirectRepository.GetAllRedirects();
+            return _redirectRepository.GetAll();
         }
 
-        /// <summary>
-        /// POST to add a new redirect
-        /// </summary>
-        /// <param name="request">Add redirect request</param>
-        /// <returns>Response object detailing success or failure </returns>
         [HttpPost]
         public AddRedirectResponse Add(AddRedirectRequest request)
         {
@@ -45,7 +34,7 @@ namespace Our.Umbraco.IpLocker.Core
 
             try
             {
-                var redirect = _redirectRepository.AddRedirect(request.IsRegex, request.OldUrl, request.NewUrl, request.Notes);
+                var redirect = _redirectRepository.Create(request.ipAddress, request.Notes);
                 return new AddRedirectResponse() { Success = true, NewRedirect = redirect };
             }
             catch(Exception e)
@@ -55,11 +44,6 @@ namespace Our.Umbraco.IpLocker.Core
             
         }
 
-        /// <summary>
-        /// POST to update a redirect
-        /// </summary>
-        /// <param name="request">Update redirect request</param>
-        /// <returns>Response object detailing success or failure</returns>
         [HttpPost]
         public UpdateRedirectResponse Update(UpdateRedirectRequest request)
         {
@@ -69,7 +53,7 @@ namespace Our.Umbraco.IpLocker.Core
 
             try
             {
-                var redirect = _redirectRepository.UpdateRedirect(request.Redirect);
+                var redirect = _redirectRepository.Update(request.Redirect);
                 return new UpdateRedirectResponse() { Success = true, UpdatedRedirect = redirect };
             }
             catch (Exception e)
@@ -78,11 +62,6 @@ namespace Our.Umbraco.IpLocker.Core
             }
         }
 
-        /// <summary>
-        /// DELETE to delete a redirect
-        /// </summary>
-        /// <param name="id">Id of redirect to delete</param>
-        /// <returns>Response object detailing success or failure</returns>
         [HttpDelete]
         public DeleteRedirectResponse Delete(int id)
         {
@@ -90,7 +69,7 @@ namespace Our.Umbraco.IpLocker.Core
 
             try
             {
-                _redirectRepository.DeleteRedirect(id);
+                _redirectRepository.Delete(id);
                 return new DeleteRedirectResponse() { Success = true };
             }
             catch(Exception e)
@@ -99,13 +78,10 @@ namespace Our.Umbraco.IpLocker.Core
             }
         }
 
-        /// <summary>
-        /// POST to clear cache
-        /// </summary>
         [HttpPost]
         public void ClearCache()
         {
-            _redirectRepository.ClearCache();
+			throw new Exception("Not sure if we should implement this");
         }
     }
 }

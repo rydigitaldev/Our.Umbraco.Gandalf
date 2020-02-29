@@ -1,18 +1,15 @@
 ﻿using Umbraco.Core;
 using Umbraco.Web;
 using Umbraco.Core.Composing;
-using Our.Umbraco.IpLocker.Core.Components;
+using Our.Umbraco.IpLocker.Core.Repositories;
 
-namespace Our.Umbraco.IpLocker.Core.Composers
+namespace Our.Umbraco.IpLocker.Core.StartUp
 {
     public class RedirectComposer : IComposer
     {
         public void Compose(Composition composition)
         {
-            //var builder = new ContainerBuilder();
-            //builder.RegisterInstance(new RedirectRepository(IScopeAccessor)).As<IRedirectRepository>();
-
-            composition.Register(typeof(IRedirectRepository), typeof(RedirectRepository));
+            composition.Register(typeof(IRepository), typeof(AllowedIpRepository));
 
             composition.ContentFinders().Insert<RedirectContentFinder>(0);
         }

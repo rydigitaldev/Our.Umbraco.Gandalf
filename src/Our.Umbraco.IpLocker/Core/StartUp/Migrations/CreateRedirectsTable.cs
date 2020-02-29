@@ -1,14 +1,11 @@
-﻿using Semver;
-using Our.Umbraco.IpLocker.Core.Models;
+﻿using Our.Umbraco.IpLocker.Core.Models.Pocos;
 using Umbraco.Core.Migrations;
 
-namespace Our.Umbraco.IpLocker.Core.Migrations
+namespace Our.Umbraco.IpLocker.Core.StartUp.Migrations
 {
-    //[Migration("1.0.1", 1, "Redirects")]
-    public class CreateRedirectsTable : MigrationBase
+	public class CreateRedirectsTable : MigrationBase
     {
-        private SemVersion _targetVersion = new SemVersion(1, 0, 1);
-        private const string REDIRECTS_TABLE_NAME = "AllowedIps";
+        private const string REDIRECTS_TABLE_NAME = "AllowedIp";
 
         public CreateRedirectsTable(IMigrationContext context) : base(context)
         { }
@@ -17,14 +14,14 @@ namespace Our.Umbraco.IpLocker.Core.Migrations
         {
             if (!this.TableExists(REDIRECTS_TABLE_NAME))
             {
-                this.Create.Table<Redirect>().Do();
+                this.Create.Table<AllowedIp>().Do();
             }
         }
     }
 
     public class CreateRedirectsTableMigrationPlan : MigrationPlan
     {
-        public CreateRedirectsTableMigrationPlan() : base("IpLocker")
+        public CreateRedirectsTableMigrationPlan() : base("Our.Umbraco.IpLocker")
         {
             From(string.Empty).To<CreateRedirectsTable>("first-migration");
         }

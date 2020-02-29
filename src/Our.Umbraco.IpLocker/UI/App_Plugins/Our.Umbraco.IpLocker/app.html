@@ -52,17 +52,11 @@
                         <table ng-table="tableParams" template-header="header" template-pagination="pager" class="table table-full table-full-small">
                             <tbody>
                                 <tr ng-repeat="item in $data">
-                                    <td data-title="'Regex'">
-                                        <input class="form-control" type="checkbox" ng-model="item.IsRegex" ng-disabled="!item.$edit" no-dirty-check />
-                                    </td>
-                                    <td data-title="'Old Url'" sortable="'OldUrl'">
-                                        <span ng-if="!item.$edit && item.IsRegex">{{item.OldUrl}}</span>
-                                        <a ng-if="!item.$edit && !item.IsRegex" href="{{item.OldUrl}}" target="_blank">{{item.OldUrl}}</a>
-                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.OldUrl" placeholder="Old Url" no-dirty-check /></div>
-                                    </td>
-                                    <td data-title="'New Url'" sortable="'NewUrl'">
-                                        <a ng-if="!item.$edit" href="{{item.NewUrl}}" target="_blank">{{item.NewUrl}}</a>
-                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.NewUrl" placeholder="New Url" no-dirty-check /></div>
+                                    
+                                    <td data-title="'IP Address'" sortable="'ipAddress'">
+                                        <span ng-if="!item.$edit && item.IsRegex">{{item.ipAddress}}</span>
+                                        <a ng-if="!item.$edit" href="{{item.ipAddress}}" target="_blank">{{item.ipAddress}}</a>
+                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.ipAddress" placeholder="IP Address" no-dirty-check /></div>
                                     </td>
                                     <td data-title="'Notes'" sortable="'Notes'">
                                         <span ng-if="!item.$edit">{{item.Notes}}</span>
