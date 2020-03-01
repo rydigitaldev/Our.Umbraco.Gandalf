@@ -22,7 +22,7 @@ namespace Our.Umbraco.IpLocker.Core
 				return false;
 			}
 
-			request.SetRedirect("/ip-not-allowed");
+			request.SetRedirect("/ip-not-allowed"); // TODO: actually handle this!
 			
 			return true;
 		}

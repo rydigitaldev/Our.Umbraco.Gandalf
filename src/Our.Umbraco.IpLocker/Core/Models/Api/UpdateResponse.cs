@@ -1,10 +1,10 @@
-﻿using Our.Umbraco.IpLocker.Core.Models.Pocos;
+﻿using Our.Umbraco.IpLocker.Core.Models.DTOs;
 
 namespace Our.Umbraco.IpLocker.Core.Models
 {
     public class UpdateResponse
     {
-        public AllowedIp Item { get; set; }
+        public AllowedIpDto Item { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
     }

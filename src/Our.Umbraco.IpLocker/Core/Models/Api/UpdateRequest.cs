@@ -1,4 +1,4 @@
-﻿using Our.Umbraco.IpLocker.Core.Models.Pocos;
+﻿using Our.Umbraco.IpLocker.Core.Models.DTOs;
 using System.ComponentModel.DataAnnotations;
 
 namespace Our.Umbraco.IpLocker.Core.Models
@@ -7,6 +7,6 @@ namespace Our.Umbraco.IpLocker.Core.Models
 
     {
         [Required]
-        public AllowedIp Item { get; set; }
+        public AllowedIpDto Item { get; set; }
     }
 }

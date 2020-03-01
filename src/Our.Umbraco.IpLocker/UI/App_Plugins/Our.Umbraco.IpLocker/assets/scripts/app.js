@@ -75,7 +75,7 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
         //Handle success from API
         if (response.data.Success) {
             $scope.errorMessage = '';
-            $scope.items.push(response.data.AllowedIp);
+            $scope.items.push(response.data.Item);
             $scope.refreshTable();
         }
         else {

@@ -1,20 +1,20 @@
-﻿using Our.Umbraco.IpLocker.Core.Models.Pocos;
+﻿using Our.Umbraco.IpLocker.Core.Extensions;
+using Our.Umbraco.IpLocker.Core.Models.DTOs;
+using Our.Umbraco.IpLocker.Core.Models.Pocos;
 using Our.Umbraco.IpLocker.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Our.Umbraco.Simple301.Core.Services
 {
 	public interface IAllowedIpService
 	{
-		AllowedIp GetById(int id);
-		AllowedIp GetByIpAddress(string ipAddress);
-		AllowedIp Create(string ipAddress, string notes);
-		IEnumerable<AllowedIp> GetAll();
-		AllowedIp Update(AllowedIp poco);
+		AllowedIpDto GetById(int id);
+		AllowedIpDto GetByIpAddress(string ipAddress);
+		AllowedIpDto Create(string ipAddress, string notes);
+		IEnumerable<AllowedIpDto> GetAll();
+		AllowedIpDto Update(AllowedIpDto poco);
 		void Delete(int id);
 	}
 
@@ -27,7 +27,7 @@ namespace Our.Umbraco.Simple301.Core.Services
 			_repository = repository;
 		}
 
-		public AllowedIp Create(string ipAddress, string notes)
+		public AllowedIpDto Create(string ipAddress, string notes)
 		{
 			var poco = new AllowedIp()
 			{
@@ -35,7 +35,8 @@ namespace Our.Umbraco.Simple301.Core.Services
 				LastUpdated = DateTime.Now.ToUniversalTime(),
 				Notes = notes
 			};
-			return _repository.Create(poco);
+
+			return _repository.Create(poco).ToDto();
 		}
 
 		public void Delete(int id)
@@ -43,32 +44,38 @@ namespace Our.Umbraco.Simple301.Core.Services
 			var poco = _repository.GetById(id);
 			if (poco == null)
 			{
-				throw new ArgumentException("No allowedIp with an Id that matches " + id);
+				throw new ArgumentException("No item with an Id that matches " + id);
 			}
 
 			_repository.Delete(poco);
 		}
 
-		public AllowedIp GetByIpAddress(string ipAddress)
+		public AllowedIpDto GetByIpAddress(string ipAddress)
 		{
-			return _repository.GetByIpAddress(ipAddress);
+			return _repository.GetByIpAddress(ipAddress).ToDto();
 		}
 
-		public IEnumerable<AllowedIp> GetAll()
+		public IEnumerable<AllowedIpDto> GetAll()
 		{
-			return _repository.GetAll();
+			return _repository.GetAll().Select(x => x.ToDto());
 		}
 
-		public AllowedIp GetById(int id)
+		public AllowedIpDto GetById(int id)
 		{
-			return _repository.GetById(id);
+			return _repository.GetById(id).ToDto();
 		}
 
-		public AllowedIp Update(AllowedIp poco)
+		public AllowedIpDto Update(AllowedIpDto dto)
 		{
-			poco.LastUpdated = DateTime.Now.ToUniversalTime();
+			var poco = new AllowedIp()
+			{
+				Id = dto.Id,
+				IpAddress = dto.IpAddress,
+				Notes = dto.Notes,
+				LastUpdated = DateTime.Now.ToUniversalTime()
+			};
 
-			return _repository.Update(poco);
+			return _repository.Update(poco).ToDto();
 		}
 	}
 }

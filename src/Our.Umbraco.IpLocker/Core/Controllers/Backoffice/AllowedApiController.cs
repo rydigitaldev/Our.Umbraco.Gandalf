@@ -1,5 +1,5 @@
 ﻿using Our.Umbraco.IpLocker.Core.Models;
-using Our.Umbraco.IpLocker.Core.Models.Pocos;
+using Our.Umbraco.IpLocker.Core.Models.DTOs;
 using Our.Umbraco.Simple301.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
 
         [HttpGet]
-        public IEnumerable<AllowedIp> GetAll()
+        public IEnumerable<AllowedIpDto> GetAll()
         {
             return _allowedIpService.GetAll();
         }
