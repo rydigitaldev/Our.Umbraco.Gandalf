@@ -32,7 +32,7 @@ namespace Our.Umbraco.IpLocker.Core.Repositories
             {
                 idObj = scope.Database.Insert(new AllowedIp()
                 {
-                    ipAddress = ipAddress,
+					IpAddress = ipAddress,
                     LastUpdated = DateTime.Now.ToUniversalTime(),
                     Notes = notes
                 });

@@ -13,8 +13,8 @@ namespace Our.Umbraco.IpLocker.Core.Models.Pocos
         [PrimaryKeyColumn(AutoIncrement = true)]
         public int Id { get; set; }
 
-        [Column("ipAddress")]
-        public string ipAddress { get; set; }
+        [Column("IpAddress")]
+        public string IpAddress { get; set; }
 
         [Column("LastUpdated")]
         public DateTime LastUpdated { get; set; }

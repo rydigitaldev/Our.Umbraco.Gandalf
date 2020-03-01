@@ -53,10 +53,10 @@
                             <tbody>
                                 <tr ng-repeat="item in $data">
                                     
-                                    <td data-title="'IP Address'" sortable="'ipAddress'">
-                                        <span ng-if="!item.$edit && item.IsRegex">{{item.ipAddress}}</span>
-                                        <a ng-if="!item.$edit" href="{{item.ipAddress}}" target="_blank">{{item.ipAddress}}</a>
-                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.ipAddress" placeholder="IP Address" no-dirty-check /></div>
+                                    <td data-title="'IP Address'" sortable="'IpAddress'">
+                                        <span ng-if="!item.$edit && item.IsRegex">{{item.IpAddress}}</span>
+                                        <a ng-if="!item.$edit" href="{{item.IpAddress}}" target="_blank">{{item.IpAddress}}</a>
+                                        <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.IpAddress" placeholder="IP Address" no-dirty-check /></div>
                                     </td>
                                     <td data-title="'Notes'" sortable="'Notes'">
                                         <span ng-if="!item.$edit">{{item.Notes}}</span>

@@ -57,7 +57,7 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
     * Sends request off to API.
     */
     $scope.addRedirect = function (redirect) {
-        IpLockerApi.add(redirect.ipAddress, redirect.Notes)
+        IpLockerApi.add(redirect.IpAddress, redirect.Notes)
             .then($scope.onAddRedirectResponse.bind(this));
     };
 
@@ -182,7 +182,7 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
             var searchedData = searchTerm ?
                 data.filter(function (redirect) {
                     return redirect.Notes.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-                        redirect.ipAddress.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+                        redirect.IpAddress.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
                 }) : data;
 
             //Are we ordering the results?
@@ -195,7 +195,7 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
             var pagedResults = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
             //Cheat and add a blank redirect so the user can add a new redirect right from the table
-            pagedResults.push({ Id: "-1", ipAddress: "", Notes: "", LastUpdated: "", $edit: true });
+            pagedResults.push({ Id: "-1", IpAddress: "", Notes: "", LastUpdated: "", $edit: true });
             $defer.resolve(pagedResults);
         }
     })
