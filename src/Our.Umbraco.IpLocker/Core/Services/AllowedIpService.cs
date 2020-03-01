@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Our.Umbraco.Simple301.Core.Services
+namespace Our.Umbraco.IpLocker.Core.Services
 {
 	public interface IAllowedIpService
 	{

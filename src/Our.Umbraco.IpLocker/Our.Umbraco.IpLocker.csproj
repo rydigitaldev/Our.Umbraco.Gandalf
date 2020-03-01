@@ -273,11 +273,17 @@
   <ItemGroup>
     <Compile Include="Core\Extensions\AllowedIpExtensions.cs" />
     <Compile Include="Core\Models\DTOs\AllowedIpDto.cs" />
+    <Compile Include="Core\Models\DTOs\AllowedIpStatusDto.cs" />
+    <Compile Include="Core\Models\Pocos\AllowedIpStatus.cs" />
+    <Compile Include="Core\Repositories\StatusRepository.cs" />
     <Compile Include="Core\Services\AllowedIpService.cs" />
+    <Compile Include="Core\Enums\Status.cs" />
+    <Compile Include="Core\Services\StatusService.cs" />
+    <Compile Include="Core\StartUp\Migrations\AllowedIpStatusTableMigration.cs" />
     <Compile Include="Core\StartUp\Migrations\MigrationsComposer.cs" />
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
-    <Compile Include="Core\StartUp\Migrations\CreateAllowedIpTable.cs" />
+    <Compile Include="Core\StartUp\Migrations\AllowedIpTableMigration.cs" />
     <Compile Include="Core\Models\Api\AddRequest.cs" />
     <Compile Include="Core\Models\Api\AddResponse.cs" />
     <Compile Include="Core\Models\Api\DeleteResponse.cs" />

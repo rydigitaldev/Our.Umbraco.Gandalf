@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.IpLocker", "Our
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Demo", "..\samples\Application.Demo\Application.Demo.csproj", "{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Package.Test", "..\tests\Package.Test\Package.Test.csproj", "{543412DE-EAC3-4464-9903-5F341BEC3DFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net45|Any CPU.Build.0 = Release|Any CPU
 		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net452|Any CPU.ActiveCfg = Release|Any CPU
 		{7A6ED7B0-DBBB-40C1-A97B-06494315ED5A}.Release-net452|Any CPU.Build.0 = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release-net45|Any CPU.Build.0 = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release-net452|Any CPU.ActiveCfg = Release|Any CPU
+		{543412DE-EAC3-4464-9903-5F341BEC3DFF}.Release-net452|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

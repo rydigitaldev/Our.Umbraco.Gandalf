@@ -17,5 +17,17 @@ namespace Our.Umbraco.IpLocker.Core.Extensions
 
 			return dto;
 		}
+
+		public static AllowedIpStatusDto ToDto(this AllowedIpStatus poco)
+		{
+			var dto = new AllowedIpStatusDto()
+			{
+				Id = poco.Id,
+				Status = poco.Status,
+				LastUpdated = poco.LastUpdated,
+			};
+
+			return dto;
+		}
 	}
 }

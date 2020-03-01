@@ -21,6 +21,17 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
         $scope.tableParams.reload();
     }
 
+
+
+    $scope.toggle = function (status) {
+        var status = IpLockerApi.setStatus(status);
+
+        console.log(status);
+
+        return;
+       // return IpLockerApi.toggle().then($scope.fetchItems.bind(this));
+    }
+
     /*
     * Handles clearing the cache by
     * calling to get all items again
@@ -261,6 +272,14 @@ angular.module("umbraco.resources").factory("IpLockerApi", function ($http) {
         //Clear cache
         clearCache: function () {
             return $http.post("backoffice/IpLocker/AllowedIpApi/ClearCache");
+        },
+
+        getStatus: function () {
+            return $http.get("backoffice/IpLocker/AllowedIpApi/GetStatus");
+        },
+
+        setStatus: function (newStatus) {
+            return $http.post("backoffice/IpLocker/AllowedIpApi/SetStatus" + newStatus);
         }
     };
 });

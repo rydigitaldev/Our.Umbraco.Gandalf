@@ -3,11 +3,11 @@ using Umbraco.Core.Migrations;
 
 namespace Our.Umbraco.IpLocker.Core.StartUp.Migrations
 {
-	public class CreateAllowedIpTable : MigrationBase
+	public class AllowedIpTableMigration : MigrationBase
     {
         private const string TABLE_NAME = "AllowedIp";
 
-        public CreateAllowedIpTable(IMigrationContext context) : base(context)
+        public AllowedIpTableMigration(IMigrationContext context) : base(context)
         { }
 
         public override void Migrate()
@@ -19,11 +19,11 @@ namespace Our.Umbraco.IpLocker.Core.StartUp.Migrations
         }
     }
 
-    public class CreateAllowedIpTableMigrationPlan : MigrationPlan
+    public class AllowedIpTableMigrationPlan : MigrationPlan
     {
-        public CreateAllowedIpTableMigrationPlan() : base("Our.Umbraco.IpLocker")
+        public AllowedIpTableMigrationPlan() : base("Our.Umbraco.IpLocker")
         {
-            From(string.Empty).To<CreateAllowedIpTable>("first-migration");
+            From(string.Empty).To<AllowedIpTableMigration>("first-migration");
         }
     }
 }

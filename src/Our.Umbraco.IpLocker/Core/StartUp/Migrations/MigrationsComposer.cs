@@ -12,40 +12,60 @@ namespace Our.Umbraco.IpLocker.Core.StartUp.Migrations
     {
         public void Compose(Composition composition)
         {
-            composition.Components()
-                 .Append<MigrationsComponent>();
+            composition.Components().Append<IpTableMigrationComponent>();
+            composition.Components().Append<StatusTableMigrationComponent>();
         }
     }
 
-	public class MigrationsComponent : IComponent
+	public class IpTableMigrationComponent : IComponent
 	{
-		private readonly IScopeProvider scopeProvider;
-		private readonly IMigrationBuilder migrationBuilder;
-		private readonly IKeyValueService keyValueService;
-		private readonly ILogger logger;
+		private readonly IScopeProvider _scopeProvider;
+		private readonly IMigrationBuilder _migrationBuilder;
+		private readonly IKeyValueService _keyValueService;
+		private readonly ILogger _logger;
 
-		public MigrationsComponent(
-			IScopeProvider scopeProvider,
-			IMigrationBuilder migrationBuilder,
-			IKeyValueService keyValueService,
-			ILogger logger)
+		public IpTableMigrationComponent(IScopeProvider scopeProvider,IMigrationBuilder migrationBuilder, IKeyValueService keyValueService, ILogger logger)
 		{
-			this.scopeProvider = scopeProvider;
-			this.migrationBuilder = migrationBuilder;
-			this.keyValueService = keyValueService;
-			this.logger = logger;
+			_scopeProvider = scopeProvider;
+			_migrationBuilder = migrationBuilder;
+			_keyValueService = keyValueService;
+			_logger = logger;
 		}
 
 		public void Initialize()
 		{
 			// perform any upgrades (as needed)
-			var upgrader = new Upgrader(new CreateAllowedIpTableMigrationPlan());
-			upgrader.Execute(scopeProvider, migrationBuilder, keyValueService, logger);
+			var upgrader = new Upgrader(new AllowedIpTableMigrationPlan());
+			upgrader.Execute(_scopeProvider, _migrationBuilder, _keyValueService, _logger);
 		}
 
-		public void Terminate()
+		public void Terminate(){ }
+	}
+
+
+
+	public class StatusTableMigrationComponent : IComponent
+	{
+		private readonly IScopeProvider _scopeProvider;
+		private readonly IMigrationBuilder _migrationBuilder;
+		private readonly IKeyValueService _keyValueService;
+		private readonly ILogger _logger;
+
+		public StatusTableMigrationComponent(IScopeProvider scopeProvider, IMigrationBuilder migrationBuilder, IKeyValueService keyValueService, ILogger logger)
 		{
-
+			_scopeProvider = scopeProvider;
+			_migrationBuilder = migrationBuilder;
+			_keyValueService = keyValueService;
+			_logger = logger;
 		}
+
+		public void Initialize()
+		{
+			// perform any upgrades (as needed)
+			var upgrader = new Upgrader(new AllowedIpStatusTableMigrationPlan());
+			upgrader.Execute(_scopeProvider, _migrationBuilder, _keyValueService, _logger);
+		}
+
+		public void Terminate() { }
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Our.Umbraco.IpLocker.Core.Models;
 using Our.Umbraco.IpLocker.Core.Models.DTOs;
-using Our.Umbraco.Simple301.Core.Services;
+using Our.Umbraco.IpLocker.Core.Models.Pocos;
+using Our.Umbraco.IpLocker.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -13,14 +14,28 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
     public class AllowedIpApiController : UmbracoAuthorizedApiController
     {
         private IAllowedIpService _allowedIpService;
+		private readonly IStatusService _statusService;
 
-        public AllowedIpApiController(IAllowedIpService allowedIpService)
+		public AllowedIpApiController(IAllowedIpService allowedIpService, IStatusService statusService)
         {
             _allowedIpService = allowedIpService;
-        }
+			_statusService = statusService;
+		}
+
+		[HttpGet]
+		public AllowedIpStatusDto GetStatus()
+		{
+			return _statusService.GetStatus();
+		}
+
+		[HttpGet]
+		public AllowedIpStatusDto SetStatus(string status)
+		{
+			return _statusService.SetStatus(status);
+		}
 
 
-        [HttpGet]
+		[HttpGet]
         public IEnumerable<AllowedIpDto> GetAll()
         {
             return _allowedIpService.GetAll();

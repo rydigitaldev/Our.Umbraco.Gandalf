@@ -1,7 +1,7 @@
 ﻿using Umbraco.Web;
 using Umbraco.Core.Composing;
 using Our.Umbraco.IpLocker.Core.Repositories;
-using Our.Umbraco.Simple301.Core.Services;
+using Our.Umbraco.IpLocker.Core.Services;
 
 namespace Our.Umbraco.IpLocker.Core.StartUp
 {
@@ -10,9 +10,10 @@ namespace Our.Umbraco.IpLocker.Core.StartUp
         public void Compose(Composition composition)
         {
             composition.Register(typeof(IAllowedIpService), typeof(AllowedIpService));
+			composition.Register(typeof(IStatusService), typeof(StatusService));
 			composition.Register(typeof(IRepository), typeof(AllowedIpRepository));
 
-            composition.ContentFinders().Insert<AllowedIpContentFinder>(0);
+			composition.ContentFinders().Insert<AllowedIpContentFinder>(0);
         }
     }
 }
