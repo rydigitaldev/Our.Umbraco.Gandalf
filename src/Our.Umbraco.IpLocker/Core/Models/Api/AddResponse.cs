@@ -2,7 +2,8 @@
 
 namespace Our.Umbraco.IpLocker.Core.Models
 {
-    public class AddRedirectResponse
+    public class AddResponse
+
     {
         public AllowedIp NewRedirect { get; set; }
         public bool Success { get; set; }

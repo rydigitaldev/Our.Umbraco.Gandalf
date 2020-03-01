@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Our.Umbraco.IpLocker.Core.Models
 {
-    public class UpdateRedirectRequest
+    public class UpdateRequest
+
     {
         [Required]
         public AllowedIp Redirect { get; set; }

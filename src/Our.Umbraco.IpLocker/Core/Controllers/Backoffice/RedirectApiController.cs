@@ -27,54 +27,54 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
         }
 
         [HttpPost]
-        public AddRedirectResponse Add(AddRedirectRequest request)
+        public AddResponse Add(AddRequest request)
         {
-            if (request == null) return new AddRedirectResponse() { Success = false, Message = "Request was empty" };
-            if (!ModelState.IsValid) return new AddRedirectResponse() { Success = false, Message = "Missing required attributes" };
+            if (request == null) return new AddResponse() { Success = false, Message = "Request was empty" };
+            if (!ModelState.IsValid) return new AddResponse() { Success = false, Message = "Missing required attributes" };
 
             try
             {
                 var redirect = _redirectRepository.Create(request.ipAddress, request.Notes);
-                return new AddRedirectResponse() { Success = true, NewRedirect = redirect };
+                return new AddResponse() { Success = true, NewRedirect = redirect };
             }
             catch(Exception e)
             {
-                return new AddRedirectResponse() { Success = false, Message = "There was an error adding the redirect : "+ e.Message };
+                return new AddResponse() { Success = false, Message = "There was an error adding the redirect : "+ e.Message };
             }
             
         }
 
         [HttpPost]
-        public UpdateRedirectResponse Update(UpdateRedirectRequest request)
+        public UpdateResponse Update(UpdateRequest request)
         {
 
-            if (request == null) return new UpdateRedirectResponse() { Success = false, Message = "Request was empty" };
-            if (!ModelState.IsValid) return new UpdateRedirectResponse() { Success = false, Message = "Missing required attributes" };
+            if (request == null) return new UpdateResponse() { Success = false, Message = "Request was empty" };
+            if (!ModelState.IsValid) return new UpdateResponse() { Success = false, Message = "Missing required attributes" };
 
             try
             {
                 var redirect = _redirectRepository.Update(request.Redirect);
-                return new UpdateRedirectResponse() { Success = true, UpdatedRedirect = redirect };
+                return new UpdateResponse() { Success = true, UpdatedRedirect = redirect };
             }
             catch (Exception e)
             {
-                return new UpdateRedirectResponse() { Success = false, Message = "There was an error updating the redirect : "+e.Message };
+                return new UpdateResponse() { Success = false, Message = "There was an error updating the redirect : "+e.Message };
             }
         }
 
         [HttpDelete]
-        public DeleteRedirectResponse Delete(int id)
+        public DeleteResponse Delete(int id)
         {
-            if (id == 0) return new DeleteRedirectResponse() { Success = false, Message = "Invalid ID passed for redirect to delete" };
+            if (id == 0) return new DeleteResponse() { Success = false, Message = "Invalid ID passed for redirect to delete" };
 
             try
             {
                 _redirectRepository.Delete(id);
-                return new DeleteRedirectResponse() { Success = true };
+                return new DeleteResponse() { Success = true };
             }
             catch(Exception e)
             {
-                return new DeleteRedirectResponse() { Success = false, Message = "There was an error deleting the redirect : " + e.Message };
+                return new DeleteResponse() { Success = false, Message = "There was an error deleting the redirect : " + e.Message };
             }
         }
 

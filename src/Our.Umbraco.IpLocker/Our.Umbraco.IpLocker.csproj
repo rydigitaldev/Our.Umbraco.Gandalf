@@ -279,18 +279,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\StartUp\MigrationsComponent.cs" />
+    <Compile Include="Core\StartUp\Migrations\MigrationsComposer.cs" />
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
-    <Compile Include="Core\StartUp\Migrations\CreateRedirectsTable.cs" />
-    <Compile Include="Core\Models\Api\AddRedirectRequest.cs" />
-    <Compile Include="Core\Models\Api\AddRedirectResponse.cs" />
-    <Compile Include="Core\Models\Api\DeleteRedirectResponse.cs" />
+    <Compile Include="Core\StartUp\Migrations\CreateAllowedIpTable.cs" />
+    <Compile Include="Core\Models\Api\AddRequest.cs" />
+    <Compile Include="Core\Models\Api\AddResponse.cs" />
+    <Compile Include="Core\Models\Api\DeleteResponse.cs" />
     <Compile Include="Core\Models\Pocos\AllowedIp.cs" />
-    <Compile Include="Core\Models\Api\UpdateRedirectRequest.cs" />
-    <Compile Include="Core\Models\Api\UpdateRedirectResponse.cs" />
+    <Compile Include="Core\Models\Api\UpdateRequest.cs" />
+    <Compile Include="Core\Models\Api\UpdateResponse.cs" />
     <Compile Include="Core\Controllers\Backoffice\RedirectApiController.cs" />
-    <Compile Include="Core\StartUp\Composers.cs" />
+    <Compile Include="Core\StartUp\IpLockerComposer.cs" />
     <Compile Include="Core\RedirectContentFinder.cs" />
     <Compile Include="Core\Repositories\AllowedIpRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
