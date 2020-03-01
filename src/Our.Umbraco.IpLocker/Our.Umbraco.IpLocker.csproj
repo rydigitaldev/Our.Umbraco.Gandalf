@@ -279,6 +279,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Services\AllowedIpService.cs" />
     <Compile Include="Core\StartUp\Migrations\MigrationsComposer.cs" />
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
@@ -291,7 +292,7 @@
     <Compile Include="Core\Models\Api\UpdateResponse.cs" />
     <Compile Include="Core\Controllers\Backoffice\AllowedApiController.cs" />
     <Compile Include="Core\StartUp\IpLockerComposer.cs" />
-    <Compile Include="Core\RedirectContentFinder.cs" />
+    <Compile Include="Core\AllowedIpContentFinder.cs" />
     <Compile Include="Core\Repositories\AllowedIpRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -300,9 +301,7 @@
     <Content Include="UI\App_Plugins\Our.Umbraco.IpLocker\package.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="UI\App_Plugins\Our.Umbraco.IpLocker\app.html" />
     <Content Include="UI\App_Plugins\Our.Umbraco.IpLocker\assets\scripts\app.js" />

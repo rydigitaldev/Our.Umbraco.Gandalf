@@ -25,18 +25,12 @@ namespace Our.Umbraco.IpLocker.Core.Repositories
 			}
         }
 
-        public AllowedIp Create(string ipAddress, string notes)
+        public AllowedIp Create(AllowedIp poco)
         {
             var idObj = new object();
             using (var scope = _scopeProvider.CreateScope())
             {
-                idObj = scope.Database.Insert(new AllowedIp()
-                {
-					IpAddress = ipAddress,
-                    LastUpdated = DateTime.Now.ToUniversalTime(),
-                    Notes = notes
-                });
-
+                idObj = scope.Database.Insert(poco);
                 scope.Complete();                
             }
 
@@ -45,31 +39,27 @@ namespace Our.Umbraco.IpLocker.Core.Repositories
             return item;
         }
 
-        public AllowedIp Update(AllowedIp allowedIp)
+        public AllowedIp Update(AllowedIp poco)
         {
             using (var scope = _scopeProvider.CreateScope())
             {
-				allowedIp.LastUpdated = DateTime.Now.ToUniversalTime();
-                scope.Database.Update(allowedIp);
+                scope.Database.Update(poco);
                 scope.Complete();
             }
             
-			return allowedIp;
+			return poco;
         }
 
-        public void Delete(int id)
+        public void Delete(AllowedIp poco)
         {
-            var item = GetById(id);
-            if (item == null) throw new ArgumentException("No allowedIp with an Id that matches " + id);
-
             using (var scope = _scopeProvider.CreateScope())
             {
-                scope.Database.Delete(item);
+                scope.Database.Delete(poco);
                 scope.Complete();
             }           
         }
 
-		public AllowedIp Get(string ipAddress)
+		public AllowedIp GetByIpAddress(string ipAddress)
 		{
 			var query = "SELECT * FROM AllowedIp WHERE ipAddress=@0";
 
@@ -79,7 +69,7 @@ namespace Our.Umbraco.IpLocker.Core.Repositories
 			}
 		}
 
-		private AllowedIp GetById(int id)
+		public AllowedIp GetById(int id)
         {
             var query = "SELECT * FROM AllowedIp WHERE Id=@0";
 

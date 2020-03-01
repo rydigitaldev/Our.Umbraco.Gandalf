@@ -7,6 +7,6 @@ namespace Our.Umbraco.IpLocker.Core.Models
 
     {
         [Required]
-        public AllowedIp Redirect { get; set; }
+        public AllowedIp Item { get; set; }
     }
 }

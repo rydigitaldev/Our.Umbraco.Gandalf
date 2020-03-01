@@ -1,6 +1,6 @@
 ﻿using Our.Umbraco.IpLocker.Core.Models;
 using Our.Umbraco.IpLocker.Core.Models.Pocos;
-using Our.Umbraco.IpLocker.Core.Repositories;
+using Our.Umbraco.Simple301.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -12,18 +12,18 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
     [PluginController("IpLocker")]
     public class AllowedIpApiController : UmbracoAuthorizedApiController
     {
-        private IRepository _repository;
+        private IAllowedIpService _allowedIpService;
 
-        public AllowedIpApiController(IRepository repository)
+        public AllowedIpApiController(IAllowedIpService allowedIpService)
         {
-            _repository = repository;
+            _allowedIpService = allowedIpService;
         }
 
 
         [HttpGet]
         public IEnumerable<AllowedIp> GetAll()
         {
-            return _repository.GetAll();
+            return _allowedIpService.GetAll();
         }
 
         [HttpPost]
@@ -34,12 +34,12 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
             try
             {
-                var redirect = _repository.Create(request.ipAddress, request.Notes);
-                return new AddResponse() { Success = true, NewRedirect = redirect };
+                var item = _allowedIpService.Create(request.ipAddress, request.Notes);
+                return new AddResponse() { Success = true, Item = item };
             }
             catch(Exception e)
             {
-                return new AddResponse() { Success = false, Message = "There was an error adding the redirect : "+ e.Message };
+                return new AddResponse() { Success = false, Message = "There was an error adding the item : " + e.Message };
             }
             
         }
@@ -53,28 +53,28 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
             try
             {
-                var redirect = _repository.Update(request.Redirect);
-                return new UpdateResponse() { Success = true, UpdatedRedirect = redirect };
+                var item = _allowedIpService.Update(request.Item);
+                return new UpdateResponse() { Success = true, Item = item };
             }
             catch (Exception e)
             {
-                return new UpdateResponse() { Success = false, Message = "There was an error updating the redirect : "+e.Message };
+                return new UpdateResponse() { Success = false, Message = "There was an error updating the item : "+e.Message };
             }
         }
 
         [HttpDelete]
         public DeleteResponse Delete(int id)
         {
-            if (id == 0) return new DeleteResponse() { Success = false, Message = "Invalid ID passed for redirect to delete" };
+            if (id == 0) return new DeleteResponse() { Success = false, Message = "Invalid ID passed for item to delete" };
 
             try
             {
-                _repository.Delete(id);
+                _allowedIpService.Delete(id);
                 return new DeleteResponse() { Success = true };
             }
             catch(Exception e)
             {
-                return new DeleteResponse() { Success = false, Message = "There was an error deleting the redirect : " + e.Message };
+                return new DeleteResponse() { Success = false, Message = "There was an error deleting the item : " + e.Message };
             }
         }
 

@@ -3,12 +3,13 @@ using Our.Umbraco.IpLocker.Core.Models.Pocos;
 
 namespace Our.Umbraco.IpLocker.Core.Repositories
 {
-    public interface IRepository
-    {
-		AllowedIp Get(string ipAddress);
-		AllowedIp Create(string ipAddress, string notes);
-        IEnumerable<AllowedIp> GetAll();
-        AllowedIp Update(AllowedIp redirect);
-		void Delete(int id);
+	public interface IRepository
+	{
+		AllowedIp GetById(int id);
+		AllowedIp GetByIpAddress(string ipAddress);
+		AllowedIp Create(AllowedIp poco);
+		IEnumerable<AllowedIp> GetAll();
+		AllowedIp Update(AllowedIp poco);
+		void Delete(AllowedIp poco);
 	}
 }

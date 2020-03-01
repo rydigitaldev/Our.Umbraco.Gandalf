@@ -17,65 +17,65 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
         //If we aren't set up yet, return
         if (!$scope.tableParams) return;
 
-        $scope.tableParams.total($scope.redirects.length);
+        $scope.tableParams.total($scope.items.length);
         $scope.tableParams.reload();
     }
 
     /*
     * Handles clearing the cache by
-    * calling to get all redirects again
+    * calling to get all items again
     */
     $scope.clearCache = function () {
         $scope.cacheCleared = true;
-        return IpLockerApi.clearCache().then($scope.fetchRedirects.bind(this));
+        return IpLockerApi.clearCache().then($scope.fetchItems.bind(this));
     }
 
     /*
-    * Handles fetching all redirects from the server.
+    * Handles fetching all items from the server.
     */
-    $scope.fetchRedirects = function () {
-        return IpLockerApi.getAll().then($scope.onRecieveAllRedirectsResponse.bind(this));
+    $scope.fetchItems = function () {
+        return IpLockerApi.getAll().then($scope.onRecieveAllItemsResponse.bind(this));
     };
 
     /*
-    * Response handler for requesting all redirects
+    * Response handler for requesting all items
     */
-    $scope.onRecieveAllRedirectsResponse = function (response) {
+    $scope.onRecieveAllItemsResponse = function (response) {
         //Somethign went wrong. Error out
         if (!response || !response.data) {
-            $scope.errorMessage = "Error fetching redirects from server";
+            $scope.errorMessage = "Error fetching items from server";
             return;
         }
 
         //We received data. Continue
-        $scope.redirects = response.data;
+        $scope.items = response.data;
         $scope.refreshTable();
     }
 
     /*
-    * Handles adding a new redirect to the redirect collection.
+    * Handles adding a new item to the collection.
     * Sends request off to API.
     */
-    $scope.addRedirect = function (redirect) {
-        IpLockerApi.add(redirect.IpAddress, redirect.Notes)
-            .then($scope.onAddRedirectResponse.bind(this));
+    $scope.addItem = function (item) {
+        IpLockerApi.add(item.IpAddress, item.Notes)
+            .then($scope.onAddItemResponse.bind(this));
     };
 
     /*
-    * Handles the Add Redirect response from the API. Checks
+    * Handles the Add Item response from the API. Checks
     * for errors and updates table.
     */
-    $scope.onAddRedirectResponse = function (response) {
+    $scope.onAddItemResponse = function (response) {
         //Check for error
         if (!response || !response.data) {
-            $scope.errorMessage = "Error sending request to add a new redirect.";
+            $scope.errorMessage = "Error sending request to add a new item.";
             return;
         }
 
         //Handle success from API
         if (response.data.Success) {
             $scope.errorMessage = '';
-            $scope.redirects.push(response.data.NewRedirect);
+            $scope.items.push(response.data.AllowedIp);
             $scope.refreshTable();
         }
         else {
@@ -84,28 +84,28 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
     }
 
     /*
-    * Handles sending a redirect to the API to as a reference for
-    * updating the redirects collection server side.
+    * Handles sending to the API to as a reference for
+    * updating the items collection server side.
     */
-    $scope.updateRedirect = function (redirect) {
-        IpLockerApi.update(redirect).then($scope.onUpdateRedirectResponse.bind(this, redirect));
+    $scope.updateItem = function (item) {
+        IpLockerApi.update(item).then($scope.onUpdateItemResponse.bind(this, item));
     }
 
     /*
-    * Handler for receiving a response from the Update Redirect API call
-    * Will update the table with the returned, updated redirect
+    * Handler for receiving a response from the Update Item API call
+    * Will update the table with the returned, updated item
     */
-    $scope.onUpdateRedirectResponse = function (redirect, response) {
+    $scope.onUpdateItemResponse = function (item, response) {
         //Check for error
         if (!response || !response.data) {
-            $scope.errorMessage = "Error sending request to update a redirect.";
+            $scope.errorMessage = "Error sending request to update a item.";
             return;
         }
 
         if (response.data.Success) {
             $scope.errorMessage = '';
-            redirect.LastUpdated = response.data.UpdatedRedirect.LastUpdated;
-            redirect.$edit = false;
+            item.LastUpdated = response.data.Item.LastUpdated;
+            item.$edit = false;
         }
         else {
             $scope.errorMessage = response.data.Message;
@@ -113,33 +113,33 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
     }
 
     /*
-    * Handles the delete request to delete a redirect.
-    * Calls the Delete API method passing in the redirect ID
+    * Handles the delete request to delete item.
+    * Calls the Delete API method passing in the item ID
     */
-    $scope.deleteRedirect = function (redirect) {
-        if (confirm("Are you sure you want to delete this redirect?")) {
-            IpLockerApi.remove(redirect.Id).then($scope.onDeleteRedirectResponse.bind(this, redirect));
+    $scope.deleteItem = function (item) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            IpLockerApi.remove(item.Id).then($scope.onDeleteItemResponse.bind(this, item));
         }
     }
 
     /*
-    * Handles the DeleteRedirect response from the API. If successful,
-    * remove the redirect from the table.
+    * Handles the DeleteItem response from the API. If successful,
+    * remove the item from the table.
     */
-    $scope.onDeleteRedirectResponse = function (redirect, response) {
+    $scope.onDeleteItemResponse = function (item, response) {
         //Check for error
         if (!response || !response.data) {
-            $scope.errorMessage = "Error sending request to delete a redirect.";
+            $scope.errorMessage = "Error sending request to delete item.";
             return;
         }
 
-        //Remove the item from the table. Splice redirect array
+        //Remove the item from the table. Splice item array
         if (response.data.Success) {
             $scope.errorMessage = '';
-            var index = $scope.redirects.indexOf(redirect);
+            var index = $scope.items.indexOf(item);
             if (index > -1) {
-                $scope.redirects.splice(index, 1);
-                $scope.tableParams.total($scope.redirects.length);
+                $scope.items.splice(index, 1);
+                $scope.tableParams.total($scope.items.length);
                 $scope.tableParams.reload();
             }
 
@@ -173,16 +173,16 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
         total: 0,
         getData: function ($defer, params) {
 
-            //Do we have redirects yet?
-            var data = $scope.redirects || [];
+            //Do we have items yet?
+            var data = $scope.items || [];
 
             //Do we have a search term set in the search box?
-            //If so, filter the redirects for that text
+            //If so, filter the items for that text
             var searchTerm = params.filter().Search;
             var searchedData = searchTerm ?
-                data.filter(function (redirect) {
-                    return redirect.Notes.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
-                        redirect.IpAddress.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+                data.filter(function (item) {
+                    return item.Notes.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 ||
+                        item.IpAddress.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
                 }) : data;
 
             //Are we ordering the results?
@@ -194,7 +194,7 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
             params.total(orderedData.length);
             var pagedResults = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
-            //Cheat and add a blank redirect so the user can add a new redirect right from the table
+            //Cheat and add a blank item so the user can add a new item right from the table
             pagedResults.push({ Id: "-1", IpAddress: "", Notes: "", LastUpdated: "", $edit: true });
             $defer.resolve(pagedResults);
         }
@@ -206,13 +206,13 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
     $scope.initLoad = function () {
         if (!$scope.initialLoad) {
             //Get the available log dates to view log entries for.
-            $scope.fetchRedirects()
+            $scope.fetchItems()
                 .then(function () { $scope.initialLoad = true; });
         }
     }
 
     $(function () {
-        $scope.$tab = $('a:contains("Manage Redirects")');
+        $scope.$tab = $('a:contains("Manage Items")');
 
         //If we have a tab, set the click handler so we only
         //load the content on tab click. 
@@ -237,23 +237,23 @@ angular.module("umbraco").controller("IpLockerController", function ($scope, $fi
 * IpLockerAPI
 * -----------------------------------------------------
 * Resource to handle making requests to the backoffice API to handle CRUD operations
-* for redirect management
 */
 angular.module("umbraco.resources").factory("IpLockerApi", function ($http) {
     return {
-        //Get all redirects from the server
+        //Get all from the server
         getAll: function () {
             return $http.get("backoffice/IpLocker/AllowedIpApi/GetAll");
         },
-        //Send data to add a new redirect
+        //Send data to add a new
         add: function (ipAddress, notes) {
             return $http.post("backoffice/IpLocker/AllowedIpApi/Add", JSON.stringify({ ipAddress: ipAddress, notes: notes }));
         },
-        //Send request to update an existing redirect
-        update: function (redirect) {
-            return $http.post("backoffice/IpLocker/AllowedIpApi/Update", JSON.stringify({ redirect: redirect }));
+        //Send request to update an existing
+        update: function (item) {
+            console.log(item);
+            return $http.post("backoffice/IpLocker/AllowedIpApi/Update", JSON.stringify({ Item: item }));
         },
-        //Remove / Delete an existing redirect
+        //Remove / Delete an existing 
         remove: function (id) {
             return $http.delete("backoffice/IpLocker/AllowedIpApi/Delete/" + id);
         },

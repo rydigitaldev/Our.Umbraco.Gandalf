@@ -26,11 +26,11 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="table-title p-20"> {{redirects.length}} rows</h3>
+                            <h3 class="table-title p-20"> {{items.length}} rows</h3>
                         </div>
                         <div class="col-md-6">
                             <div class="table-search">
-                                <input type="text" ng-model="tableParams.filter()['Search']" class="form-control" placeholder="Search redirects" autofocus no-dirty-check />
+                                <input type="text" ng-model="tableParams.filter()['Search']" class="form-control" placeholder="Search" autofocus no-dirty-check />
                             </div>
                         </div>
                     </div>
@@ -47,14 +47,13 @@
                         </div>
                     </div>
 
-                    <!-- Redirect Table -->
+                    <!-- Item Table -->
                     <div class="table-responsive white">
                         <table ng-table="tableParams" template-header="header" template-pagination="pager" class="table table-full table-full-small">
                             <tbody>
                                 <tr ng-repeat="item in $data">
-                                    
                                     <td data-title="'IP Address'" sortable="'IpAddress'">
-                                        <span ng-if="!item.$edit && item.IsRegex">{{item.IpAddress}}</span>
+                                        <span ng-if="!item.$edit">{{item.IpAddress}}</span>
                                         <a ng-if="!item.$edit" href="{{item.IpAddress}}" target="_blank">{{item.IpAddress}}</a>
                                         <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.IpAddress" placeholder="IP Address" no-dirty-check /></div>
                                     </td>
@@ -67,9 +66,9 @@
                                     </td>
                                     <td data-title="'Actions'">
                                         <button ng-if="!item.$edit" ng-click="item.$edit = true" class="btn btn-info">Edit</button>
-                                        <button ng-if="item.$edit  && item.Id != -1" ng-click="updateRedirect(item)" class="btn btn-success">Save</button>
-                                        <button ng-if="item.Id != -1" class="btn btn-danger" ng-click="deleteRedirect(item)">Delete</button>
-                                        <button ng-if="item.$edit  && item.Id == -1" ng-click="addRedirect(item)" class="btn btn-primary">Add</button>
+                                        <button ng-if="item.$edit  && item.Id != -1" ng-click="updateItem(item)" class="btn btn-success">Save</button>
+                                        <button ng-if="item.Id != -1" class="btn btn-danger" ng-click="deleteItem(item)">Delete</button>
+                                        <button ng-if="item.$edit  && item.Id == -1" ng-click="addItem(item)" class="btn btn-primary">Add</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -81,7 +80,7 @@
     </div>
 </div>
 
-<!-- Pagination Template for ngTable redirect table -->
+<!-- Pagination Template for ngTable table -->
 <script type="text/ng-template" id="pager">
 
     <div class="p-20">
@@ -104,7 +103,7 @@
     </div>
 </script>
 
-<!-- Header Template for ngTable redirect table -->
+<!-- Header Template for ngTable table -->
 <script type="text/ng-template" id="header">
     <tr>
         <th title="{{$column.headerTitle(this)}}" ng-repeat="$column in $columns" ng-class="{ 'sortable': $column.sortable(this), 'sort-asc': params.sorting()[$column.sortable(this)]=='asc', 'sort-desc': params.sorting()[$column.sortable(this)]=='desc' }" ng-click="sortBy($column, $event)" ng-show="$column.show(this)" ng-init="template=$column.headerTemplateURL(this)" class="header {{$column.class(this)}}">

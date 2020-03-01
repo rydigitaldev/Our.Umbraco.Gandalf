@@ -3,10 +3,10 @@ using Our.Umbraco.IpLocker.Core.Repositories;
 
 namespace Our.Umbraco.IpLocker.Core
 {
-	public class RedirectContentFinder : IContentFinder
+	public class AllowedIpContentFinder : IContentFinder
 	{
 		public IRepository _repository;
-		public RedirectContentFinder(IRepository repository)
+		public AllowedIpContentFinder(IRepository repository)
 		{
 			_repository = repository;
 		}
@@ -16,8 +16,11 @@ namespace Our.Umbraco.IpLocker.Core
 			// TODO: change this to be IP based - also check for ip-not-allowed
 			var path = request.Uri.PathAndQuery.ToLower();
 
-			var matchedRedirect = _repository.Get(path);
-			if (matchedRedirect == null) return false;
+			var item = _repository.GetByIpAddress(path);
+			if (item == null)
+			{
+				return false;
+			}
 
 			request.SetRedirect("/ip-not-allowed");
 			
