@@ -289,7 +289,7 @@
     <Compile Include="Core\Models\Pocos\AllowedIp.cs" />
     <Compile Include="Core\Models\Api\UpdateRequest.cs" />
     <Compile Include="Core\Models\Api\UpdateResponse.cs" />
-    <Compile Include="Core\Controllers\Backoffice\RedirectApiController.cs" />
+    <Compile Include="Core\Controllers\Backoffice\AllowedApiController.cs" />
     <Compile Include="Core\StartUp\IpLockerComposer.cs" />
     <Compile Include="Core\RedirectContentFinder.cs" />
     <Compile Include="Core\Repositories\AllowedIpRepository.cs" />

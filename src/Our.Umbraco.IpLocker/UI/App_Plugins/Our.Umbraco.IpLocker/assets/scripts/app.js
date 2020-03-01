@@ -243,24 +243,24 @@ angular.module("umbraco.resources").factory("IpLockerApi", function ($http) {
     return {
         //Get all redirects from the server
         getAll: function () {
-            return $http.get("backoffice/IpLocker/RedirectApi/GetAll");
+            return $http.get("backoffice/IpLocker/AllowedIpApi/GetAll");
         },
         //Send data to add a new redirect
         add: function (ipAddress, notes) {
-            return $http.post("backoffice/IpLocker/RedirectApi/Add", JSON.stringify({ ipAddress: ipAddress, notes: notes }));
+            return $http.post("backoffice/IpLocker/AllowedIpApi/Add", JSON.stringify({ ipAddress: ipAddress, notes: notes }));
         },
         //Send request to update an existing redirect
         update: function (redirect) {
-            return $http.post("backoffice/IpLocker/RedirectApi/Update", JSON.stringify({ redirect: redirect }));
+            return $http.post("backoffice/IpLocker/AllowedIpApi/Update", JSON.stringify({ redirect: redirect }));
         },
         //Remove / Delete an existing redirect
         remove: function (id) {
-            return $http.delete("backoffice/IpLocker/RedirectApi/Delete/" + id);
+            return $http.delete("backoffice/IpLocker/AllowedIpApi/Delete/" + id);
         },
 
         //Clear cache
         clearCache: function () {
-            return $http.post("backoffice/IpLocker/RedirectApi/ClearCache");
+            return $http.post("backoffice/IpLocker/AllowedIpApi/ClearCache");
         }
     };
 });

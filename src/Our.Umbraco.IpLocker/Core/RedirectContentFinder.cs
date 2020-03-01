@@ -5,10 +5,10 @@ namespace Our.Umbraco.IpLocker.Core
 {
 	public class RedirectContentFinder : IContentFinder
 	{
-		public IRepository _redirectRepository;
-		public RedirectContentFinder(IRepository redirectRepository)
+		public IRepository _repository;
+		public RedirectContentFinder(IRepository repository)
 		{
-			_redirectRepository = redirectRepository;
+			_repository = repository;
 		}
 
 		public bool TryFindContent(PublishedRequest request)
@@ -16,7 +16,7 @@ namespace Our.Umbraco.IpLocker.Core
 			// TODO: change this to be IP based - also check for ip-not-allowed
 			var path = request.Uri.PathAndQuery.ToLower();
 
-			var matchedRedirect = _redirectRepository.Get(path);
+			var matchedRedirect = _repository.Get(path);
 			if (matchedRedirect == null) return false;
 
 			request.SetRedirect("/ip-not-allowed");

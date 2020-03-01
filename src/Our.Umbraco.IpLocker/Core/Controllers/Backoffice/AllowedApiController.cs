@@ -10,20 +10,20 @@ using Umbraco.Web.WebApi;
 namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 {
     [PluginController("IpLocker")]
-    public class RedirectApiController : UmbracoAuthorizedApiController
+    public class AllowedIpApiController : UmbracoAuthorizedApiController
     {
-        private IRepository _redirectRepository;
+        private IRepository _repository;
 
-        public RedirectApiController(IRepository redirectRepository)
+        public AllowedIpApiController(IRepository repository)
         {
-            _redirectRepository = redirectRepository;
+            _repository = repository;
         }
 
 
         [HttpGet]
         public IEnumerable<AllowedIp> GetAll()
         {
-            return _redirectRepository.GetAll();
+            return _repository.GetAll();
         }
 
         [HttpPost]
@@ -34,7 +34,7 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
             try
             {
-                var redirect = _redirectRepository.Create(request.ipAddress, request.Notes);
+                var redirect = _repository.Create(request.ipAddress, request.Notes);
                 return new AddResponse() { Success = true, NewRedirect = redirect };
             }
             catch(Exception e)
@@ -53,7 +53,7 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
             try
             {
-                var redirect = _redirectRepository.Update(request.Redirect);
+                var redirect = _repository.Update(request.Redirect);
                 return new UpdateResponse() { Success = true, UpdatedRedirect = redirect };
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace Our.Umbraco.IpLocker.Controllers.Backoffice
 
             try
             {
-                _redirectRepository.Delete(id);
+                _repository.Delete(id);
                 return new DeleteResponse() { Success = true };
             }
             catch(Exception e)
